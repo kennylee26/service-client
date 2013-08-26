@@ -69,6 +69,7 @@ public class SmsServiceClient {
 		inputBean.setMessage(message);
 		inputBean.setPhones(phones);
 		WebClient client = WebClient.create(endpointUrl + "/send", providers);
+		WebClient.getConfig(client).getHttpConduit().getClient().setReceiveTimeout(120000);
 		Response r = client.accept("application/json").type("application/json")
 				.post(inputBean);
 		MappingJsonFactory factory = new MappingJsonFactory();
